@@ -49,8 +49,8 @@ then
 fi
 
 Define Log and Password File Paths
-The script defines paths for the log file and a secure password file, creating and setting permissions for them as needed.
 
+The script defines paths for the log file and a secure password file, creating and setting permissions for them as needed.
 
 LOGFILE="/var/log/user_management.log"
 
@@ -76,6 +76,7 @@ generate_random_password()
 }
 
 Log Messages
+
 A helper function log_message is used to log messages with timestamps.
 
 log_message()
@@ -89,6 +90,7 @@ The create_user function handles creating the user, adding them to specified gro
 
 
 create_user()
+
 {
     local username=$1
     
@@ -136,12 +138,19 @@ The script reads the input file line by line and calls create_user for each user
 
 
 while IFS=';' read -r username groups; do
-    [[ -z "$username" || "$username" =~ ^# ]] && continue
+
+    [[ -z "$username" || "$username" =~ ^# ]] && 
+    
     if getent passwd "$username" > /dev/null; then
+    
         create_user "$username" "$groups" "exists"
+        
     else
+    
         create_user "$username" "$groups"
+        
     fi
+    
 done < "$1"
 
 Completion Log
@@ -154,9 +163,11 @@ log_message "User creation process completed."
 This script automates user management tasks, making it easier to handle multiple user accounts and their configurations in a consistent and secure manner.
 
 Error Handling
+
 #The script handles existing users and groups, ensuring smooth execution without interruptions.
 
 Conclusion
+
 Automating user management tasks with a bash script enhances efficiency and security in a growing organization. This script provides a reliable solution for SysOps engineers to manage user accounts effectively.
 
 
