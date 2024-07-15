@@ -42,7 +42,6 @@ Script Breakdown
 Root Privileges Check
 The script starts by checking if it is executed with root privileges. If not, it exits with an error message.
 
-
 if (( UID != 0 ))
 then
     echo "Script requires root accessibility"
@@ -54,23 +53,33 @@ The script defines paths for the log file and a secure password file, creating a
 
 
 LOGFILE="/var/log/user_management.log"
+
 PASSWORD_FILE="/var/secure/user_passwords.csv"
+
 mkdir -p /var/secure
+
 touch "$LOGFILE" "$PASSWORD_FILE"
+
 chmod 600 "$PASSWORD_FILE"
 
 Generate Random Password
+
 A helper function generate_random_password is defined to create secure random passwords.
 
 generate_random_password()
+
 {
     local length=${1:-10}
+    
     tr -dc 'A-Za-z0-9!?%+=' < /dev/urandom | head -c "$length"
+    
 }
+
 Log Messages
 A helper function log_message is used to log messages with timestamps.
 
 log_message()
+
 {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"
 }
@@ -82,6 +91,7 @@ The create_user function handles creating the user, adding them to specified gro
 create_user()
 {
     local username=$1
+    
     local groups=$2
 
     if ! getent group "$username" > /dev/null; then
