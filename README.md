@@ -1,6 +1,8 @@
 Automating User Management with a Bash Script
 
 Introduction
+
+
 In a growing organization, managing user accounts manually can become cumbersome and error-prone. Automating this process ensures consistency, saves time, and enhances security.
  In this article, we’ll walk through a bash script that automates user creation, group assignments, and password generation. 
  This script is designed for a SysOps engineer tasked with onboarding new developers efficiently.
